@@ -12,16 +12,19 @@ class AbstractMelonOrder():
 
     def get_total(self):
         """Calculate price, including tax."""
-
         base_price = 5
-        total = (1 + self.tax) * self.qty * base_price
+        christmas_price = base_price * 1.5
+        if self.order_type == "International" and self.qty <10:
+            total = ((1 + self.tax) * self.qty * christmas_price) + 3
+        else:
+            total = (1 + self.tax) * self.qty * christmas_price
 
         return total
     
-    def mark_shipped(self):
-        """Record the fact than an order has been shipped."""
+    #def mark_shipped_code(self):
+    #     """Return the country code."""
 
-        self.shipped = True
+    #return self.country_code
 
 class DomesticMelonOrder(AbstractMelonOrder):
     """A melon order within the USA."""
@@ -30,7 +33,19 @@ class DomesticMelonOrder(AbstractMelonOrder):
 class InternationalMelonOrder(AbstractMelonOrder):
     """An international (non-US) melon order."""
     tax = 0.17
+    
+    
+    #get_total.total = total + 3 
+    # def xmas_total(self):
+    #     if self.qty < 10:
+    #         super().get_total()
 
+    # def get_total(self):
+    #     """Calculate price, including tax."""
+    #     if self.qty < 10:
+    #         total = total + 3
+
+    #     return total
 
     # def get_country_code(self):
     #     """Return the country code."""
