@@ -1,7 +1,6 @@
 """Classes for melon orders."""
 
 class AbstractMelonOrder():
-
     def __init__(self, species, qty, order_type, tax, country_code):
         self.species = species
         self.qty = qty
@@ -9,10 +8,17 @@ class AbstractMelonOrder():
         self.order_type = order_type
         self.tax = tax
         self.country_code = country_code
+    
+    @classmethod
+    def get_base_price(cls,base_price=5):
+        '''Splurge pricing method'''
+        import random
+        num = random.randint(5,9)
+        return num
 
     def get_total(self):
         """Calculate price, including tax."""
-        base_price = 5
+        base_price = self.get_base_price()
         christmas_price = base_price * 1.5
         if self.order_type == "International" and self.qty <10:
             total = ((1 + self.tax) * self.qty * christmas_price) + 3
