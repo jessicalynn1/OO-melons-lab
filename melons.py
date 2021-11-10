@@ -14,7 +14,15 @@ class AbstractMelonOrder():
         '''Splurge pricing method'''
         import random
         num = random.randint(5,9)
-        return num
+        #return num
+    
+        from datetime import datetime
+        # date = 
+        if datetime.now.weekday() != ("Saturday", "Sunday") and datetime.now.hour >=8 or <= 11:
+        #date is displayed as number
+            return num + 4
+        else:
+            return num
 
     def get_total(self):
         """Calculate price, including tax."""
